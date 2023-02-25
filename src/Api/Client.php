@@ -109,7 +109,8 @@ class Client
             $response = $this->httpClient->get('boletos/'.$token);
 
             return [
-                'pdf'          => $response->getBody(),
+                'content-length' => $response->getHeader('Content-Length')[0],
+                'pdf'          => $response->getBody()->getContents(),
                 'request'      => $response,
             ];
         } catch (RequestException $e) {
@@ -308,7 +309,7 @@ class Client
             if ($response->getStatusCode() == 200) {
                 return [
                     'arquivos' => json_decode($response->getBody()->getContents(), true)['retornos']['arquivos'],
-                    //'request' => $response
+                    'request' => $response
                 ];
             }
         } catch (RequestException $e) {
@@ -317,23 +318,21 @@ class Client
     }
 
     /**
-     * @param array Boleto $boletos
-     * @param string $tipo
+     * @param array $boletos
+     * @param string $tipo => ['carne', 'boleto']
      *
      * @return array|mixed
      */
-    public function gerarBoletosEmLote(array $boletos, $tipo = 'carne'):array
+    public function gerarBoletosEmLote(array $boletos, $tipo = 'carne'): array
     {
         try {
 
             $uri = ($tipo == 'carne') ? 'carnes' : 'batch/boletos';
 
-
             foreach ($boletos as $key => $value) {
                 $dadosBoleto[] = $value->parserCarne();
             }
 
-            //$batch = json_encode(array('batch' => array('boletos' => $dadosBoleto)), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             $batch = array('batch' => array('boletos' => $dadosBoleto));
 
             $response = $this->httpClient->post($uri, [
@@ -345,8 +344,7 @@ class Client
 
             return [
                 'body' => json_decode($response->getBody()->getContents()),
-                'location' => $response->getHeader('Location')[0],
-                //'request' => $response
+                'location' => $response->getHeader('Location')[0]
             ];
         } catch (RequestException $e) {
             return json_decode($e->getResponse()->getBody()->getContents(), true);
