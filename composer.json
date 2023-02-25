@@ -1,6 +1,6 @@
 {
     "name": "marksamp/boleto-cloud",
-    "description": "SDK de integraçao com a API Boleto Cloud",
+    "description": "SDK de integração com a API Boleto Cloud",
     "type": "project",
     "license": "MIT",
     "minimum-stability": "stable",
