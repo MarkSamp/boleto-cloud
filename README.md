@@ -8,10 +8,10 @@ Agradecimentos ao usuário @millerp/boleto-cloud-sdk
 
 ### Instalação
 ```
-composer require MarkSamp/boleto-cloud
+composer require marksamp/boleto-cloud
 ```
 
-### Exemplo
+### Exemplo de Emissão de um boleto individual
 ```php
 <?php
 
