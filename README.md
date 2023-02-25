@@ -8,7 +8,7 @@ Agradecimentos ao usuário @millerp/boleto-cloud-sdk por ter compartilhado o có
 
 ### Instalação
 ```
-composer require marksamp/boleto-cloud
+composer require marksamp/boleto-cloud:dev-main
 ```
 
 ### Exemplo de Emissão de um boleto individual.
