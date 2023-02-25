@@ -11,7 +11,7 @@ Agradecimentos ao usuário @millerp/boleto-cloud-sdk por ter compartilhado o có
 composer require marksamp/boleto-cloud
 ```
 
-### Exemplo de Emissão de um boleto individual
+### Exemplo de Emissão de um boleto individual.
 ```php
 <?php
 
