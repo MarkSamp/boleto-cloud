@@ -344,7 +344,10 @@ class Client
 
             return [
                 'body' => json_decode($response->getBody()->getContents()),
-                'location' => $response->getHeader('Location')[0]
+                'location' => $response->getHeader('Location')[0],
+                'token_carne' => json_decode($response->getBody(), true)['batch']['token'],
+                'titulos' => json_decode($response->getBody(), true)['batch']['titulos'],
+                'tokens_boletos' => json_decode($response->getBody(), true)['batch']['boletos']
             ];
         } catch (RequestException $e) {
             return json_decode($e->getResponse()->getBody()->getContents(), true);
